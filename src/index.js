@@ -1,4 +1,4 @@
-import { createNewTask } from "./tasks/tasks.js";
+import { createNewTask, getTasksToRun } from "./tasks/tasks.js";
 import { mainMenu, newTaskMenu, runTaskMenu } from "./menus/menus.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -18,8 +18,9 @@ const main = async () => {
         createNewTask(data);
         break;
       case 2:
-        data = runTaskMenu();
-        console.log("data ", data);
+        data = await runTaskMenu();
+        const tasks = await getTasksToRun(data);
+        console.log(tasks);
         break;
       case 3:
         process.exit(0);
