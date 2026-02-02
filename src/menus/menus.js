@@ -84,3 +84,6 @@ export const newTaskMenu = async () => {
   const data = await inquirer.prompt(createTaskQuesitons);
   return data;
 };
+
+
+export runTaskOne

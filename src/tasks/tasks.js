@@ -1,6 +1,6 @@
 import client from "../bd.js";
 
-const connectToDB = async () => {
+export const connectToDB = async () => {
 
   try {
     await client.connect();
@@ -26,12 +26,33 @@ export const createNewTask = async (data) => {
 }
 // Obtener todas las tareas en el orden especificado
 export const getTasksToRun = async (data) => {
+
+  console.log('data recibida en getTasksToRun:', data.order);
+
   
   try {
 
     const tasksCollection = await connectToDB();
-    const tasks = await tasksCollection.find().toArray()
-    return tasks;
+    
+
+      switch (data.order) {
+    case 'random':      
+      const task = await tasksCollection.aggregate([{ $sample: { size: 5 } }]).toArray();  
+      return task
+      
+    case 'desc':
+      console.log('Orden: Descendente');
+      const tasksDesc = await tasksCollection.find().sort({ createdAt: -1 }).toArray();
+      return tasksDesc
+      break;
+    case 'asc':
+      const taskAsc = await tasksCollection.find().sort({ createdAt: 1 }).toArray();
+      return taskAsc  
+      break;
+    default:
+      console.log('Orden: Desconocido');
+  }
+
     
     
     

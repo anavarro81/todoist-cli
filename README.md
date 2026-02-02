@@ -2,31 +2,47 @@
 Aplicación minimalista de gestión de tareas por consola. Permite gestionar las tareas de una en una para evitar agobiarse. 
 
 
-## Nueva tarea
+## Modelos
 - New Task
     - Name
     - Description (opc)
     - Label (opc)
     - Proyect (opc)
-    - Date (opc)
+    - dueDate (opc)
+    - CreateAt (automatica)
     - priority
 
 
 
+## Nueva Tarea
 
-- Crear la tarea en la base de datos
-    - Conectar a la BBDD
-    - Insertar en la BBDD
-    - Desconectar   
--
+### newTaskMenu 
+- Solicita los datos del usario
+- Llama a `createNewTask` para crear la tarea
+
+### createNewTask
+- Obtiene la fecha del dia. Añade el campo: `createdAt`
+
+  
+
 
 ## Ejecutar tareas
-Show task one by one. 
 
-order
-- 0 - Default
-- 1 - By date descent
-- 2 - By date ascent
+- `runTaskMenu` => Muestra el menú para recuperar las tareas. 
+- `getTasksToRun` => Devuelve un array con las tareas a ejecuta segun el orden elegido. 
+
+Menu de orden de tareas:
+
+```
+const runTaskQuestions = [
+  {name: 'Random', value: 'random'},
+  {name: 'Descending', value: 'desc'},
+  {name: 'Ascending', value: 'asc'}
+]
+```
+
+
+
 
 
 ## Today

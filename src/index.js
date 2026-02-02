@@ -20,7 +20,7 @@ const main = async () => {
       case 2:
         data = await runTaskMenu();
         const tasks = await getTasksToRun(data);
-        console.log(tasks);
+        console.log('taras obtenidas: ', tasks);
         break;
       case 3:
         process.exit(0);
