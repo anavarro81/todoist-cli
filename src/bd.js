@@ -2,16 +2,22 @@ import {MongoClient} from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log('BD_URI:', process.env.BD_URI);
-
+let db = null;
 
 const client = new MongoClient(process.env.BD_URI);
 
 export default client
 
 export const conectBD = async () => {
-    const bd = await client.connect()
-    console.log('Conectado a la base de datos: ', bd.databaseName);
+    //Establece conexión de RED con el servidor MongoDB
+    return await client.connect()   
+    
+}
+
+export const getDB = async() => {
+    const client = await conectBD()
+    const db = client.db('todoist')
+    return db
 }
 
 export const disconnectBD = async () => {

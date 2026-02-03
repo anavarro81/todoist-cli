@@ -1,5 +1,10 @@
-import { createNewTask, getTasksToRun } from "./tasks/tasks.js";
-import { mainMenu, newTaskMenu, runTaskMenu, runTaskOneByOneMenu } from "./menus/menus.js";
+import { createNewTask, getTasksToRun } from "./services/task.service.js";
+import {
+  mainMenu,
+  newTaskMenu,
+  runTaskMenu,
+  runTaskOneByOneMenu,
+} from "./menus/menus.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -20,7 +25,13 @@ const main = async () => {
       case 2:
         data = await runTaskMenu();
         const tasks = await getTasksToRun(data);
-        const resp =  runTaskOneByOneMenu(tasks);
+
+        let exit = "N";
+
+        while (exit == "N") {
+          exit = await runTaskOneByOneMenu(tasks);
+        }
+
         break;
       case 3:
         process.exit(0);
