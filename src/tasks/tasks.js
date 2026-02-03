@@ -37,7 +37,8 @@ export const getTasksToRun = async (data) => {
 
       switch (data.order) {
     case 'random':      
-      const task = await tasksCollection.aggregate([{ $sample: { size: 5 } }]).toArray();  
+      const task = await tasksCollection.aggregate([{ $sample: { size: 5 } }]).toArray();
+      console.log('tareas recuperadas: ', task);  
       return task
       
     case 'desc':

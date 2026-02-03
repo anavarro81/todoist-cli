@@ -86,4 +86,27 @@ export const newTaskMenu = async () => {
 };
 
 
-export runTaskOne
+export const runTaskOneByOneMenu = async(tasks) => {
+
+  console.log('tareas en runTaskOneByOneMenu: ', tasks);
+
+  const data = await inquirer.prompt([
+    {
+      type: "confirm",
+      name: "completed",
+      message: `¿Has completado la tarea: ${tasks[0].taskName}?`,
+      default: true,
+    },
+
+    {
+      type: "confirm",
+      name: "exit",
+      message: `Salir`,
+      default: true,
+
+    }
+  ])
+
+  return data;
+
+}
