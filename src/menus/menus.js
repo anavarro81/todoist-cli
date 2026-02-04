@@ -108,23 +108,6 @@ export const runTaskOneByOneMenu = async (tasks) => {
     },
   ]);
 
-  console.log("datos del menu ", data);
+  return data.opc
 
-  const {opc} = data
-
-  // if opc == "completedNext"
-  // Borrar de la base de datos la tarea
-  // Eliminar el primer elmento del array 
-
-  if (opc == "completedNext") {
-    console.log('tarea completada ', tasks[0])
-  }
-
-  if (opc == "exit" ){
-    console.log("volver al menu principal");
-    return "S"
-  } else {
-    console.log("Sigo en el menu principal");
-    return "N";
-  }
 };

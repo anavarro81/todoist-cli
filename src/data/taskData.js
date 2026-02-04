@@ -20,7 +20,6 @@ export const taskData = [
     description: null,
     label: "Gestiones",
     proyect: "Proyecto 2",
-    dueDate: null,
     priority: "Media"
   },
   {
@@ -44,7 +43,6 @@ export const taskData = [
     description: "Organizar cables y papeles",
     label: "5_minutos",
     proyect: "Proyecto 3",
-    dueDate: null,
     priority: "Baja"
   },
   {
@@ -76,7 +74,6 @@ export const taskData = [
     description: "Ajustar los tornillos de la base",
     label: "Casa",
     proyect: "Proyecto 2",
-    dueDate: null,
     priority: "Baja"
   }
 ];

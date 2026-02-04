@@ -1,17 +1,9 @@
-import client from "../bd.js";
-import { insertTask, getTasks } from "../repository/task.repository.js";
-
-export const connectToDB = async () => {
-  try {
-    await client.connect();
-    const db = client.db(process.env.DB_NAME);
-    const tasksCollection = db.collection("tasks");
-    return tasksCollection;
-  } catch (error) {
-    console.error("Error connecting to the database:", error);
-    process.exit(1);
-  }
-};
+import {
+  insertTask,
+  getTasks,
+  deleteTask,
+} from "../repository/task.repository.js";
+import { runTaskMenu, runTaskOneByOneMenu } from "../menus/menus.js";
 
 export const createNewTask = async (data) => {
   try {
@@ -23,33 +15,41 @@ export const createNewTask = async (data) => {
 // Obtener todas las tareas en el orden especificado
 export const getTasksToRun = async (data) => {
   try {
-    const tasksCollection = await connectToDB();
-
-    switch (data.order) {
-      case "random":
-        const tasks = getTasks(data.order);
-        return tasks;
-
-      case "desc":
-        console.log("Orden: Descendente");
-        const tasksDesc = await tasksCollection
-          .find()
-          .sort({ createdAt: -1 })
-          .toArray();
-        return tasksDesc;
-        break;
-      case "asc":
-        const taskAsc = await tasksCollection
-          .find()
-          .sort({ createdAt: 1 })
-          .toArray();
-        return taskAsc;
-        break;
-      default:
-        console.log("Orden: Desconocido");
-    }
+    const tasks = getTasks(data.order);
+    return tasks;
   } catch (error) {
     console.log("error al obtener tareas", error);
     process.exit(1);
   }
+};
+
+export const runTasks = async () => {
+  // selecctionar orden de tareas
+  const data = await runTaskMenu();
+
+  const tasks = await getTasksToRun(data);
+
+  let opc = "";
+
+  opc = await runTaskOneByOneMenu(tasks);
+
+  let exit = "N";
+
+  while (exit != "S")
+    if (opc == "completedNext") {
+      await deleteTask(tasks[0]._id);
+      tasks.shift();
+      if (tasks.length > 0) {
+        opc = await runTaskOneByOneMenu(tasks);
+      } else {
+        console.log("No quedan tareas");
+        exit = "S";
+      }
+    } else if (opc == "completedExit") {
+      await deleteTask(tasks[0]._id);
+      tasks.shift();
+      exit = "S";
+    } else {
+      exit = "S";
+    }
 };

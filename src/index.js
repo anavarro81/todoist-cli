@@ -1,4 +1,5 @@
-import { createNewTask, getTasksToRun } from "./services/task.service.js";
+import { createNewTask, runTasks } from "./services/task.service.js";
+import { deleteTask } from "./repository/task.repository.js";
 import {
   mainMenu,
   newTaskMenu,
@@ -23,15 +24,7 @@ const main = async () => {
         createNewTask(data);
         break;
       case 2:
-        data = await runTaskMenu();
-        const tasks = await getTasksToRun(data);
-
-        let exit = "N";
-
-        while (exit == "N") {
-          exit = await runTaskOneByOneMenu(tasks);
-        }
-
+        await runTasks();
         break;
       case 3:
         process.exit(0);

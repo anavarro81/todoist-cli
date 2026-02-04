@@ -22,14 +22,22 @@ export const insertTask = async (data) => {
 export const getTasks = async (order) => {
   const db = await getDB();
   const tasksCollection = db.collection("tasks");
-
+  let task = "";
   switch (order) {
     case "random":
-      const task = await tasksCollection
+      task = await tasksCollection
         .aggregate([{ $sample: { size: 5 } }])
         .toArray();
       return task;
-  
-  
-    }
+    case "desc":
+      task = await tasksCollection.find({ dueDate: { $exists: true}}).sort({ dueDate: -1 }).toArray();
+      console.log("tareas descendente ", task);
+      return task;
+    case "asc":
+      task = await tasksCollection.find({ dueDate: { $exists: true}}).sort({ dueDate: 1 }).toArray();
+      console.log("tareas ascendente ", task);
+      return task;
+    default:
+      console.log("orden no valido ");
+  }
 };

@@ -1,9 +1,12 @@
-import { connectToDB } from "../tasks/tasks.js";
+import {getDB} from '../bd.js'
 import { taskData } from "../data/taskData.js";
 
 export const loadTasks = async () => {
   try {
-    const tasksCollection = await connectToDB();
+    
+
+    const db = await getDB()
+    const tasksCollection = db.collection('tasks')
 
     await tasksCollection.deleteMany({});
     console.log("Se han borrado las tareas");
