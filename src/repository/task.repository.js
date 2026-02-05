@@ -26,7 +26,7 @@ export const getTasks = async (order) => {
   switch (order) {
     case "random":
       task = await tasksCollection
-        .aggregate([{ $sample: { size: 5 } }])
+        .aggregate([{ $sample: { size: 10 } }])
         .toArray();
       return task;
     case "desc":
