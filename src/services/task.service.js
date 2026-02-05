@@ -1,13 +1,9 @@
-import {
-  insertTask,
-  getTasks,
-  deleteTask,
-} from "../repository/task.repository.js";
-import { runTaskMenu, runTaskOneByOneMenu } from "../menus/menus.js";
+import * as tasksRepository from "../repository/task.repository.js";
+import { runTaskMenu, runTaskOneByOneMenu, todayTaskMenu } from "../menus/menus.js";
 
 export const createNewTask = async (data) => {
   try {
-    await insertTask(data);
+    await tasksRepository.insertTask(data);
   } catch (error) {
     console.error("error al insertar", error);
   }
@@ -15,7 +11,7 @@ export const createNewTask = async (data) => {
 // Obtener todas las tareas en el orden especificado
 export const getTasksToRun = async (data) => {
   try {
-    const tasks = getTasks(data.order);
+    const tasks = await tasksRepository.getTasks(data.order);
     return tasks;
   } catch (error) {
     console.log("error al obtener tareas", error);
@@ -27,7 +23,7 @@ export const runTasks = async () => {
   // selecctionar orden de tareas
   const data = await runTaskMenu();
 
-  const tasks = await getTasksToRun(data);
+  const tasks = await tasksRepository.getTasksToRun(data);
 
   let opc = "";
 
@@ -53,3 +49,30 @@ export const runTasks = async () => {
       exit = "S";
     }
 };
+
+
+export const getTodayTask = async () => {
+  try {
+    const todayTask = await tasksRepository.getTodayTasks();   
+    
+
+    if (todayTask.length > 0) {
+
+      let opc = await todayTaskMenu(todayTask);
+
+      while (opc != "exit") {
+        opc = await todayTaskMenu(todayTask);
+      }
+
+      return 
+    } else {
+      console.log("No tienes tareas para hoy");
+      return
+    }
+
+      
+
+  } catch (error) {
+    console.log("error al obtener tareas de hoy ", error);
+  }
+}

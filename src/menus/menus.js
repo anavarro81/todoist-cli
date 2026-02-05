@@ -3,8 +3,11 @@ import inquirer from "inquirer";
 const mainMenuChoices = [
   { name: "Alta de tarea", value: 1 },
   { name: "Ejecutar tareas", value: 2 },
-  { name: "Salir", value: 3 },
+  { name: "Tareas de hoy", value: 3 },
+  { name: "Salir", value: 4 },
 ];
+
+
 
 const runTaskQuestions = [
   { name: "Random", value: "random" },
@@ -111,3 +114,28 @@ export const runTaskOneByOneMenu = async (tasks) => {
   return data.opc
 
 };
+
+export const todayTaskMenu = async (todayTask) => {
+
+  console.log("Tareas de hoy: ");
+
+  const opcSalir = [{ name: "Salir", value: "exit" }];
+
+  
+  console.table(todayTask, ["name", "description" ]);
+  
+  // '\b\b' `Tarea #${i + 1}:`, todayTask[i].name + '\n' + "Descripcion: " + todayTask[i].description
+
+  const data = await inquirer.prompt([{
+    type: "rawlist",
+    name: "opc",
+    message: "Selecciona salir para volver al menu principal",
+    choices: opcSalir
+  }]);
+
+  console.log("opcion seleccionada ", data.opc);
+
+  return data.opc;
+
+
+}

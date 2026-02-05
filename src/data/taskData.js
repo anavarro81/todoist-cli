@@ -4,7 +4,7 @@ export const taskData = [
     description: "Revisar la bandeja de entrada y contestar clientes",
     label: "Trabajo",
     proyect: "Proyecto 1",
-    dueDate: "2026-02-02",
+    dueDate: new Date(),
     priority: "Alta"
   },
   {
@@ -27,7 +27,7 @@ export const taskData = [
     description: "Subir los últimos cambios del módulo de login",
     label: "5_minutos",
     proyect: "Proyecto 1",
-    dueDate: "2026-02-05",
+    dueDate: new Date(),
     priority: "Alta"
   },
   {
@@ -50,7 +50,7 @@ export const taskData = [
     description: "Definir objetivos del próximo sprint",
     label: "Trabajo",
     proyect: "Proyecto 1",
-    dueDate: "2026-02-02",
+    dueDate: new Date(),
     priority: "Alta"
   },
   {
@@ -66,7 +66,7 @@ export const taskData = [
     description: "Celebración fin de fase",
     label: "Trabajo",
     proyect: "Proyecto 3",
-    dueDate: "2026-02-15",
+    dueDate: new Date(),
     priority: null
   },
   {
