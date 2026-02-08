@@ -15,7 +15,7 @@ export const insertTask = async (data) => {
     const db = await getDB();
     db.collection("tasks").insertOne({ ...data, createdAt: currentDate });
   } catch (error) {
-    console.log("error al insertar la tarea ", error);
+    console.error("error al insertar la tarea ", error);
   }
 };
 
@@ -31,13 +31,13 @@ export const getTasks = async (order) => {
       return task;
     case "desc":
       task = await tasksCollection.find({ dueDate: { $exists: true}}).sort({ dueDate: -1 }).toArray();
-      console.log("tareas descendente ", task);
+      
       return task;
     case "asc":
       task = await tasksCollection.find({ dueDate: { $exists: true}}).sort({ dueDate: 1 }).toArray();
-      console.log("tareas ascendente ", task);
+      
       return task;
     default:
-      console.log("orden no valido ");
+      console.error("orden no valido ");
   }
 };

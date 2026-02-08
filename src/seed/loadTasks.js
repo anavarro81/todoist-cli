@@ -14,7 +14,7 @@ export const loadTasks = async () => {
     console.log("Tareas cargadas correctamente");
     process.exit(1)
   } catch (error) {
-    console.log("Error al cargar las tareas", error);
+    console.error("Error al cargar las tareas", error);
   }
 };
 

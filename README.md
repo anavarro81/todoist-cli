@@ -42,7 +42,10 @@ const runTaskQuestions = [
 ```
 
 
-
+## Librerias
+`cross-env` 
+- Permite establecer la variable de entorno en el fichero .env segun queremos ejeuctar en desarrollo o producción. 
+- Se incluye en el comando de `package.json`
 
 
 ## Today

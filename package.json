@@ -5,14 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development node ./src/index.js",
+    "start": "cross-env NODE_ENV=production node ./src/index.js",
     "load": "node ./src/seed/loadTasks.js"
   },
   "keywords": [],
   "author": "Antonio Navarro",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
     "inquirer": "^13.2.0",
     "mongodb": "^7.0.0"

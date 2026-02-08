@@ -88,7 +88,7 @@ export const runTaskOneByOneMenu = async (tasks) => {
     {
       type: "rawlist",
       name: "opc",
-      message: `¿Has completado la tarea: ${tasks[0].name}`,
+      message: `¿Has completado la tarea: ${tasks[0].taskName}`,
       choices: [
         {
           name: `Sí, la he completado. Quiero otra`,

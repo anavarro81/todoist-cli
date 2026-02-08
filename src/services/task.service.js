@@ -18,16 +18,16 @@ export const getTasksToRun = async (data) => {
     const tasks = getTasks(data.order);
     return tasks;
   } catch (error) {
-    console.log("error al obtener tareas", error);
+    console.error("error al obtener tareas", error);
     process.exit(1);
   }
 };
 
 export const runTasks = async () => {
   // selecctionar orden de tareas
-  const data = await runTaskMenu();
+  const order = await runTaskMenu();
 
-  const tasks = await getTasksToRun(data);
+  const tasks = await getTasksToRun(order);  
 
   let opc = "";
 
