@@ -37,7 +37,7 @@ export const runTasks = async () => {
 
   while (exit != "S")
     if (opc == "completedNext") {
-      await deleteTask(tasks[0]._id);
+      await tasksRepository.deleteTask(tasks[0]._id);
       tasks.shift();
       if (tasks.length > 0) {
         opc = await runTaskOneByOneMenu(tasks);
