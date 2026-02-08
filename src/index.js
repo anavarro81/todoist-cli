@@ -1,4 +1,4 @@
-import { createNewTask, runTasks } from "./services/task.service.js";
+import { createNewTask, runTasks, getTodayTask } from "./services/task.service.js";
 import { deleteTask } from "./repository/task.repository.js";
 import {
   mainMenu,
@@ -14,7 +14,7 @@ dotenv.config();
 const main = async () => {
   let opc = 0;
 
-  while (opc != 3) {
+  while (opc != 4) {
     let { opc } = await mainMenu();
     opc = parseInt(opc);
 
@@ -29,6 +29,9 @@ const main = async () => {
         await runTasks();
         break;
       case 3:
+        await getTodayTask()
+        break;
+      case 4:
         process.exit(0);
       default:
         console.log("Opción inválida, por favor intente de nuevo.");

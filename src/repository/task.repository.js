@@ -6,7 +6,7 @@ export const deleteTask = async (id) => {
   try {
     const db = await getDB();
     db.collection("tasks").deleteOne({ _id: id });
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const insertTask = async (data) => {
@@ -26,18 +26,43 @@ export const getTasks = async (order) => {
   switch (order) {
     case "random":
       task = await tasksCollection
-        .aggregate([{ $sample: { size: 5 } }])
+        .aggregate([{ $sample: { size: 10 } }])
         .toArray();
       return task;
     case "desc":
-      task = await tasksCollection.find({ dueDate: { $exists: true}}).sort({ dueDate: -1 }).toArray();
-      
+      task = await tasksCollection.find({ dueDate: { $exists: true } }).sort({ dueDate: -1 }).toArray();
+      console.log("tareas descendente ", task);
       return task;
     case "asc":
-      task = await tasksCollection.find({ dueDate: { $exists: true}}).sort({ dueDate: 1 }).toArray();
-      
+      task = await tasksCollection.find({ dueDate: { $exists: true } }).sort({ dueDate: 1 }).toArray();
+      console.log("tareas ascendente ", task);
       return task;
     default:
       console.error("orden no valido ");
   }
 };
+
+export const getTodayTasks = async () => {
+
+  try {
+
+    const db = await getDB();
+    const tasksCollection = db.collection("tasks");
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const todayTask = await tasksCollection.find({ dueDate: { $gte: today, $lte: endOfDay } }).toArray();
+    return todayTask
+
+  } catch (error) {
+
+    console.log("error al obtener tareas de hoy ", error);
+  }
+
+
+
+}
+
