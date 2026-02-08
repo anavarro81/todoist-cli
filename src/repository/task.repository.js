@@ -13,6 +13,12 @@ export const insertTask = async (data) => {
   try {
     const currentDate = new Date();
     const db = await getDB();
+
+    if (data.label) {
+      
+    }
+
+
     db.collection("tasks").insertOne({ ...data, createdAt: currentDate });
   } catch (error) {
     console.error("error al insertar la tarea ", error);

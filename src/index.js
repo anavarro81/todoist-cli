@@ -3,8 +3,6 @@ import { deleteTask } from "./repository/task.repository.js";
 import {
   mainMenu,
   newTaskMenu,
-  runTaskMenu,
-  runTaskOneByOneMenu,
 } from "./menus/menus.js";
 import dotenv from "dotenv";
 dotenv.config();

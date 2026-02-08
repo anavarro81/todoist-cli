@@ -1,5 +1,9 @@
 import * as tasksRepository from "../repository/task.repository.js";
-import { runTaskMenu, runTaskOneByOneMenu, todayTaskMenu } from "../menus/menus.js";
+import {
+  runTaskMenu,
+  runTaskOneByOneMenu,
+  todayTaskMenu,
+} from "../menus/menus.js";
 
 export const createNewTask = async (data) => {
   try {
@@ -23,7 +27,7 @@ export const runTasks = async () => {
   // selecctionar orden de tareas
   const order = await runTaskMenu();
 
-  const tasks = await getTasksToRun(order);  
+  const tasks = await getTasksToRun(order);
 
   let opc = "";
 
@@ -42,7 +46,7 @@ export const runTasks = async () => {
         exit = "S";
       }
     } else if (opc == "completedExit") {
-      await deleteTask(tasks[0]._id);
+      await tasksRepository.deleteTask(tasks[0]._id);
       tasks.shift();
       exit = "S";
     } else {
@@ -50,29 +54,23 @@ export const runTasks = async () => {
     }
 };
 
-
 export const getTodayTask = async () => {
   try {
-    const todayTask = await tasksRepository.getTodayTasks();   
-    
+    const todayTask = await tasksRepository.getTodayTasks();
 
     if (todayTask.length > 0) {
-
       let opc = await todayTaskMenu(todayTask);
 
       while (opc != "exit") {
         opc = await todayTaskMenu(todayTask);
       }
 
-      return 
+      return;
     } else {
       console.log("No tienes tareas para hoy");
-      return
+      return;
     }
-
-      
-
   } catch (error) {
     console.log("error al obtener tareas de hoy ", error);
   }
-}
+};

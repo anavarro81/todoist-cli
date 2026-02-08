@@ -28,7 +28,7 @@ Aplicación minimalista de gestión de tareas por consola. Permite gestionar las
 
 ## Ejecutar tareas
 
-- `runTaskMenu` => Muestra el menú para recuperar las tareas. 
+- `runTaskMenu` (menus.js)=> Muestra el menú para recuperar las tareas. 
 - `getTasksToRun` => Devuelve un array con las tareas a ejecuta segun el orden elegido. 
 
 Menu de orden de tareas:

@@ -7,8 +7,6 @@ const mainMenuChoices = [
   { name: "Salir", value: 4 },
 ];
 
-
-
 const runTaskQuestions = [
   { name: "Random", value: "random" },
   { name: "Descending", value: "desc" },
@@ -97,45 +95,57 @@ export const runTaskOneByOneMenu = async (tasks) => {
           name: `Sí, la he completado. Quiero otra`,
           value: "completedNext",
         },
-        { 
-          name: 'Sí, la he completado. Quiero salir`,', 
-          value: "completedExit" 
+        {
+          name: "Sí, la he completado. Quiero salir`,",
+          value: "completedExit",
         },
         {
-          name: 'Salir`,', 
-          value: "exit" 
-
-        }
-
+          name: "Salir`,",
+          value: "exit",
+        },
       ],
     },
   ]);
 
-  return data.opc
-
+  return data.opc;
 };
 
 export const todayTaskMenu = async (todayTask) => {
-
   console.log("Tareas de hoy: ");
 
   const opcSalir = [{ name: "Salir", value: "exit" }];
 
-  
-  console.table(todayTask, ["name", "description" ]);
-  
+  console.table(todayTask, ["name", "description"]);
+
   // '\b\b' `Tarea #${i + 1}:`, todayTask[i].name + '\n' + "Descripcion: " + todayTask[i].description
 
-  const data = await inquirer.prompt([{
-    type: "rawlist",
-    name: "opc",
-    message: "Selecciona salir para volver al menu principal",
-    choices: opcSalir
-  }]);
+  const data = await inquirer.prompt([
+    {
+      type: "rawlist",
+      name: "opc",
+      message: "Selecciona salir para volver al menu principal",
+      choices: opcSalir,
+    },
+  ]);
 
   console.log("opcion seleccionada ", data.opc);
 
   return data.opc;
+};
 
+// export const showTaskByCategory = async () => {
+//   try {
 
-}
+//     const categories = await
+
+//     const opc = inquirer.prompt({
+//       type: "rawlist",
+//       name: "category",
+//       message: "Selecciona de que categoria quieres ver las opciones"
+//       choices:
+//     })
+
+//   } catch (error) {
+
+//   }
+// }
