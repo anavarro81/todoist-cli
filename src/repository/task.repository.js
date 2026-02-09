@@ -1,7 +1,7 @@
 import { getDB } from "../bd.js";
 import {newLabel} from '../repository/label.respository.js'
 export const deleteTask = async (id) => {
-  console.log("borrar tarea con id ", id);
+  
 
   try {
     const db = await getDB();
@@ -15,13 +15,15 @@ export const insertTask = async (data) => {
     const db = await getDB();
 
 
-    if (data.confirmLabel) {
-      console.log('insertar label')
+    if (data.confirmLabel) {      
       await newLabel(data.label)
     }
 
 
-    db.collection("tasks").insertOne({ ...data, createdAt: currentDate });
+    const task = await db.collection("tasks").insertOne({ ...data, createdAt: currentDate });
+
+    
+
     return 
   } catch (error) {
     console.error("error al insertar la tarea ", error);
@@ -40,11 +42,11 @@ export const getTasks = async (order) => {
       return task;
     case "desc":
       task = await tasksCollection.find({ dueDate: { $exists: true } }).sort({ dueDate: -1 }).toArray();
-      console.log("tareas descendente ", task);
+      
       return task;
     case "asc":
       task = await tasksCollection.find({ dueDate: { $exists: true } }).sort({ dueDate: 1 }).toArray();
-      console.log("tareas ascendente ", task);
+      
       return task;
     default:
       console.error("orden no valido ");
@@ -68,7 +70,7 @@ export const getTodayTasks = async () => {
 
   } catch (error) {
 
-    console.log("error al obtener tareas de hoy ", error);
+    console.error("error al obtener tareas de hoy ", error);
   }
 
 

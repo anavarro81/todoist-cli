@@ -1,13 +1,12 @@
-import { createNewTask, runTasks, getTodayTask } from "./services/task.service.js";
-import { deleteTask } from "./repository/task.repository.js";
 import {
-  mainMenu,
-  newTaskMenu,
-} from "./menus/menus.js";
+  createNewTask,
+  runTasks,
+  getTodayTask,
+} from "./services/task.service.js";
+import { deleteTask } from "./repository/task.repository.js";
+import { mainMenu, newTaskMenu } from "./menus/menus.js";
 import dotenv from "dotenv";
 dotenv.config();
-
-
 
 const main = async () => {
   let opc = 0;
@@ -21,13 +20,14 @@ const main = async () => {
     switch (opc) {
       case 1:
         data = await newTaskMenu();
-        createNewTask(data);
+        await createNewTask(data);
+
         break;
       case 2:
         await runTasks();
         break;
       case 3:
-        await getTodayTask()
+        await getTodayTask();
         break;
       case 4:
         process.exit(0);

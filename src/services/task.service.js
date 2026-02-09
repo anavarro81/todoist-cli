@@ -7,12 +7,10 @@ import {
 
 export const createNewTask = async (data) => {
   try {
-    
-    if (data.confirmLabel) {
-      
-    }
-    
+
     await tasksRepository.insertTask(data);
+    
+    return;
   } catch (error) {
     console.error("error al insertar", error);
   }
@@ -76,6 +74,6 @@ export const getTodayTask = async () => {
       return;
     }
   } catch (error) {
-    console.log("error al obtener tareas de hoy ", error);
+    console.error("error al obtener tareas de hoy ", error);
   }
 };

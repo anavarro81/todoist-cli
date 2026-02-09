@@ -129,7 +129,7 @@ export const runTaskOneByOneMenu = async (tasks) => {
 };
 
 export const todayTaskMenu = async (todayTask) => {
-  console.log("Tareas de hoy: ");
+  
 
   const opcSalir = [{ name: "Salir", value: "exit" }];
 
@@ -146,7 +146,7 @@ export const todayTaskMenu = async (todayTask) => {
     },
   ]);
 
-  console.log("opcion seleccionada ", data.opc);
+  
 
   return data.opc;
 };
