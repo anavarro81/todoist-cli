@@ -42,11 +42,29 @@ export const createTaskQuesitons = [
       { name: "Baja", value: "baja" },
     ],
   },
+  
   {
-    type: "input",
-    name: "label",
-    message: "Etiqueta para la tarea (opcional):",
+    type: 'list',
+    name: 'confirmLabel',
+    message: '¿Quieres agregar una etiqueta a la tarea?',
+    choices: [
+      { name: 'Sí', value: true },
+      { name: 'No', value: false },
+    ],
+    default: 1,
   },
+
+  {
+    type: "rawlist",
+    name: "label",
+    message: "Selecciona una etiqueta: ",
+    choices: [
+      {name: "5 minutos", value: "5_minutos"},
+      {name: "calle", value: "calle"},
+      {name: "mañana", value: "manana"},
+    ]
+  },
+
   {
     type: "input",
     name: "project",

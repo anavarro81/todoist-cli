@@ -1,17 +1,27 @@
-export const newLabel = async (category) => {
+import { getDB } from "../bd.js";
 
-    if (!category) {
+export const newLabel = async (label) => {
+
+    if (!label) {
         console.error('nombre de la etiqueta no informado')
         return
     }
 
+    console.log('label recbido: ', label)
+
     try {
         const db = await getDB();
-        const labelInserted = await db.collection("label").insertOne(label)        
-        return labelInserted
+        const existLabel = await db.collection("label").find({label}).toArray()       
+        
+        if (!existLabel) {
+            console.log('insertar label ')
+            const labelInserted = await db.collection("label").insertOne({label})
+            console.log('labelInserted ', labelInserted)        
+            return labelInserted
+        }                    
         
     } catch (error) {
-        console.log('error al crear la categoria ', error)        
+        console.log('error al crear la etiqueta ', error)        
     }
 }
 

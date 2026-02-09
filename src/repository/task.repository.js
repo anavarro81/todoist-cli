@@ -1,5 +1,5 @@
 import { getDB } from "../bd.js";
-
+import {newLabel} from '../repository/label.respository.js'
 export const deleteTask = async (id) => {
   console.log("borrar tarea con id ", id);
 
@@ -14,8 +14,10 @@ export const insertTask = async (data) => {
     const currentDate = new Date();
     const db = await getDB();
 
-    if (data.label) {
-      
+
+    if (data.confirmLabel) {
+      console.log('insertar label')
+      await newLabel(data.label)
     }
 
 

@@ -7,6 +7,11 @@ import {
 
 export const createNewTask = async (data) => {
   try {
+    
+    if (data.confirmLabel) {
+      
+    }
+    
     await tasksRepository.insertTask(data);
   } catch (error) {
     console.error("error al insertar", error);
