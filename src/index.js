@@ -32,7 +32,7 @@ const main = async () => {
       case 4:
         process.exit(0);
       default:
-        console.log("Opción inválida, por favor intente de nuevo.");
+        console.error("Opción inválida, por favor intente de nuevo.");
     }
   }
 };

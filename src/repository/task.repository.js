@@ -22,6 +22,7 @@ export const insertTask = async (data) => {
 
 
     db.collection("tasks").insertOne({ ...data, createdAt: currentDate });
+    return 
   } catch (error) {
     console.error("error al insertar la tarea ", error);
   }
