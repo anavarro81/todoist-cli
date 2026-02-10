@@ -149,7 +149,16 @@ export const todayTaskMenu = async (todayTask) => {
 
 export const showLabelsMenu = async (labels) => {
 
-  
+    let labelChoices = []
+
+    for (const label of labels) {
+
+      let labelChoice = {name: label, value: label}
+      labelChoices.append(labelChoice)
+
+    }
+
+    console.log()
   
     const data = await inquirer.prompt({
       type: "rawlist",
