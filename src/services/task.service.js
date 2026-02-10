@@ -7,9 +7,8 @@ import {
 
 export const createNewTask = async (data) => {
   try {
-
     await tasksRepository.insertTask(data);
-    
+
     return;
   } catch (error) {
     console.error("error al insertar", error);
@@ -77,3 +76,25 @@ export const getTodayTask = async () => {
     console.error("error al obtener tareas de hoy ", error);
   }
 };
+
+export const getTaskBylabel = async (label) => {
+  try {
+    if (!label) {
+      console.error("label no inforado");
+      return;
+    }
+    const task = tasksRepository.getTaskBylabel(label)
+    
+    if (!task.length) {
+      console.log(`No existen tareas para la etiqueta ${label}`)
+      return
+    } else {
+      return task
+    }
+
+  } catch (error) {
+    console.error('Error al recuperar las tareas de la label ', error)
+  }
+};
+
+

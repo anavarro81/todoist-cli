@@ -1,12 +1,10 @@
 import { getDB } from "../bd.js";
-import {newLabel} from '../repository/label.respository.js'
+import { newLabel } from "../repository/label.respository.js";
 export const deleteTask = async (id) => {
-  
-
   try {
     const db = await getDB();
-    db.collection("tasks").deleteOne({ _id: id });
-  } catch (error) { }
+    await db.collection("tasks").deleteOne({ _id: id });
+  } catch (error) {}
 };
 
 export const insertTask = async (data) => {
@@ -14,17 +12,15 @@ export const insertTask = async (data) => {
     const currentDate = new Date();
     const db = await getDB();
 
-
-    if (data.confirmLabel) {      
-      await newLabel(data.label)
+    if (data.confirmLabel) {
+      await newLabel(data.label);
     }
 
+    const task = await db
+      .collection("tasks")
+      .insertOne({ ...data, createdAt: currentDate });
 
-    const task = await db.collection("tasks").insertOne({ ...data, createdAt: currentDate });
-
-    
-
-    return 
+    return;
   } catch (error) {
     console.error("error al insertar la tarea ", error);
   }
@@ -41,12 +37,18 @@ export const getTasks = async (order) => {
         .toArray();
       return task;
     case "desc":
-      task = await tasksCollection.find({ dueDate: { $exists: true } }).sort({ dueDate: -1 }).toArray();
-      
+      task = await tasksCollection
+        .find({ dueDate: { $exists: true } })
+        .sort({ dueDate: -1 })
+        .toArray();
+
       return task;
     case "asc":
-      task = await tasksCollection.find({ dueDate: { $exists: true } }).sort({ dueDate: 1 }).toArray();
-      
+      task = await tasksCollection
+        .find({ dueDate: { $exists: true } })
+        .sort({ dueDate: 1 })
+        .toArray();
+
       return task;
     default:
       console.error("orden no valido ");
@@ -54,9 +56,7 @@ export const getTasks = async (order) => {
 };
 
 export const getTodayTasks = async () => {
-
   try {
-
     const db = await getDB();
     const tasksCollection = db.collection("tasks");
 
@@ -65,15 +65,28 @@ export const getTodayTasks = async () => {
     let endOfDay = new Date();
     endOfDay.setHours(23, 59, 59, 999);
 
-    const todayTask = await tasksCollection.find({ dueDate: { $gte: today, $lte: endOfDay } }).toArray();
-    return todayTask
-
+    const todayTask = await tasksCollection
+      .find({ dueDate: { $gte: today, $lte: endOfDay } })
+      .toArray();
+    return todayTask;
   } catch (error) {
-
     console.error("error al obtener tareas de hoy ", error);
   }
+};
 
+export const getTaskBylabel = async (label) => {
+  try {
+    const db = await getDB();
+    const tasksCollection = db.collection("tasks");
+    const tasks = await tasksCollection.find({ label }).toArray();
 
-
-}
-
+    if (tasks.length == 0) {
+      console.log(`No existen tareas de la categoria: ${label}`);
+      return;
+    } else {
+      return tasks;
+    }
+  } catch (error) {
+    console.log("error al recuperar las tares ", error);
+  }
+};

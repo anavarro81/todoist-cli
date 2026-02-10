@@ -42,14 +42,14 @@ export const createTaskQuesitons = [
       { name: "Baja", value: "baja" },
     ],
   },
-  
+
   {
-    type: 'list',
-    name: 'confirmLabel',
-    message: '¿Quieres agregar una etiqueta a la tarea?',
+    type: "list",
+    name: "confirmLabel",
+    message: "¿Quieres agregar una etiqueta a la tarea?",
     choices: [
-      { name: 'Sí', value: true },
-      { name: 'No', value: false },
+      { name: "Sí", value: true },
+      { name: "No", value: false },
     ],
     default: 1,
   },
@@ -59,10 +59,10 @@ export const createTaskQuesitons = [
     name: "label",
     message: "Selecciona una etiqueta: ",
     choices: [
-      {name: "5 minutos", value: "5_minutos"},
-      {name: "calle", value: "calle"},
-      {name: "mañana", value: "manana"},
-    ]
+      { name: "5 minutos", value: "5_minutos" },
+      { name: "calle", value: "calle" },
+      { name: "mañana", value: "manana" },
+    ],
   },
 
   {
@@ -129,8 +129,6 @@ export const runTaskOneByOneMenu = async (tasks) => {
 };
 
 export const todayTaskMenu = async (todayTask) => {
-  
-
   const opcSalir = [{ name: "Salir", value: "exit" }];
 
   console.table(todayTask, ["name", "description"]);
@@ -146,24 +144,18 @@ export const todayTaskMenu = async (todayTask) => {
     },
   ]);
 
-  
-
   return data.opc;
 };
 
-// export const showTaskByCategory = async () => {
-//   try {
+export const showLabelsMenu = async (labels) => {
 
-//     const categories = await
-
-//     const opc = inquirer.prompt({
-//       type: "rawlist",
-//       name: "category",
-//       message: "Selecciona de que categoria quieres ver las opciones"
-//       choices:
-//     })
-
-//   } catch (error) {
-
-//   }
-// }
+  
+  
+    const data = await inquirer.prompt({
+      type: "rawlist",
+      name: "label",
+      message: "Selecciona una etiqueta",
+      choices: labels,
+    });
+    return data.label
+};

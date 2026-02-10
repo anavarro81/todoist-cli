@@ -3,7 +3,7 @@ import {
   runTasks,
   getTodayTask,
 } from "./services/task.service.js";
-import { deleteTask } from "./repository/task.repository.js";
+
 import { mainMenu, newTaskMenu } from "./menus/menus.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -11,7 +11,7 @@ dotenv.config();
 const main = async () => {
   let opc = 0;
 
-  while (opc != 4) {
+  while (opc != 5) {
     let { opc } = await mainMenu();
     opc = parseInt(opc);
 
@@ -30,6 +30,9 @@ const main = async () => {
         await getTodayTask();
         break;
       case 4:
+        await:   
+      case 5:
+        case 4:
         process.exit(0);
       default:
         console.error("Opción inválida, por favor intente de nuevo.");

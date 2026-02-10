@@ -8,13 +8,13 @@ export const newLabel = async (label) => {
 
   try {
     const db = await getDB();
-    const existLabel = await db.collection("label").find({ label }).toArray();
+    const existLabel = await db.collection("labels").find({ label }).toArray();
 
     
 
     if (existLabel.length == 0) {
       
-      const labelInserted = await db.collection("label").insertOne({ label });
+      const labelInserted = await db.collection("labels").insertOne({ label });
       
       return labelInserted;
     }
@@ -23,7 +23,14 @@ export const newLabel = async (label) => {
   }
 };
 
-export const getCategories = async () => {
+export const getLabels = async () => {
   try {
-  } catch {}
+
+     const db = getDB() 
+     const labels = await db.collection('labels').find({}).toArray()
+     return labels
+
+  } catch {
+    console.error('error al recuperar los labels')
+  }
 };
