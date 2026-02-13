@@ -2,7 +2,10 @@ import {
   createNewTask,
   runTasks,
   getTodayTask,
+  
 } from "./services/task.service.js";
+
+import {showTaskbyLabel} from './services/label.service.js'
 
 import { mainMenu, newTaskMenu } from "./menus/menus.js";
 import dotenv from "dotenv";
@@ -30,7 +33,7 @@ const main = async () => {
         await getTodayTask();
         break;
       case 4:
-        await:   
+        await showTaskbyLabel   
       case 5:
         case 4:
         process.exit(0);
